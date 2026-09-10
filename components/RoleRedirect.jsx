@@ -1,0 +1,39 @@
+"use client"
+import { usePathname,useRouter } from 'next/navigation';
+import React, { useEffect } from 'react'
+
+const INTERVIEWER_ONLY = ["/appointment"];
+const INTERVIEWEE_ONLY = ["/dashboard"];
+
+const RoleRedirect = ({role}) => {
+    const pathname = usePathname();
+    const router  = useRouter();
+    useEffect(()=>{
+        if(role === "UNASSIGNED" && pathname !== "/onboarding")
+            router.replace("/onboarding")
+
+        // Already onboaeded users shouldnot be on onboarding
+        if(role === "INTERVIEWER" && pathname.startsWith("/onboarding"))
+            router.replace("/dashboard")
+        
+        if(role === "INTERVIEWEE" && pathname.startsWith("/onboarding"))
+            router.replace("/explore")
+        
+        if(
+            role ==="INTERVIEWER" &&
+            INTERVIEWER_ONLY.some((p) => pathname.startsWith(p))
+        )
+        router.replace("/dashboard")
+
+        if(
+            role ==="INTERVIEWEE" &&
+            INTERVIEWER_ONLY.some((p) => pathname.startsWith(p))
+        )
+        router.replace("/appointments")
+    },[role,pathname,router]);
+  return (
+    null
+  )
+}
+
+export default RoleRedirect
