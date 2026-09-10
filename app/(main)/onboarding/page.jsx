@@ -1,7 +1,7 @@
 "use client"
 
 import { completeOnboarding } from '@/actions/onboarding';
-import { GoldTitle, GrayTitle, SectionLable } from '@/components/reusable';
+import { GoldTitle, GrayTitle, SectionLabel } from '@/components/reusable';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -26,9 +26,9 @@ const OnboardingPage = () => {
 
     useEffect(()=>{
         if(data && !loading){
-            router.push(role === "INTERVIEWER"?"/dashboard":"/explore ");
+            router.push(role === "INTERVIEWER" ? "/dashboard" : "/explore");
         }
-    },[data,loading])
+    },[data,loading,role,router])
 
     const toggleCategory = (val) =>{
         setForm((prev)=>({
@@ -68,7 +68,7 @@ const OnboardingPage = () => {
     <div className='min-h-screen px-6 py-16 flex flex-col items-center '>
         <div className='w-full max-w-2xl'>
             <div className='text-center mb-10'>
-                <SectionLable>Welcome</SectionLable>
+                <SectionLabel>Welcome</SectionLabel>
                 <h1 className='font-serif text-5xl leading-tight tracking-tighter mt-1'>
                     <GrayTitle>How will you be</GrayTitle>
                     <br />

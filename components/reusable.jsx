@@ -2,7 +2,7 @@ export const GrayTitle = ({children})=>(<span className="bg-gradient-to-br from-
 
 export const GoldTitle = ({children})=>(<span className="bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 bg-clip-text text-transparent">{children}</span>);
 
-export const SectionLable = ({children})=>(
+export const SectionLabel = ({children})=>(
    <p className="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 tracking-[0.14em] uppercase mb-4">
     <span className="w-4 h-px bg-amber-400"></span>
     {children}
@@ -21,7 +21,7 @@ export default function PageHeader({label,gray,gold,description,right}){
       <div className="border-b border-white/8 px-8 py-10">
          <div className="max-w-6xl mx-auto flex items-center justify-between gap-4 ">
             <div>
-               {label && <SectionLable>{label}</SectionLable>}
+               {label && <SectionLabel>{label}</SectionLabel>}
                <h1 className="font-serif text-5xl tracking-tight mt-1">
                   {gray && <GrayTitle>{gray}</GrayTitle>}
                   {gold && <GoldTitle>{gold}</GoldTitle>}

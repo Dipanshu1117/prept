@@ -1,6 +1,6 @@
 import { getInterviewerProfile } from "@/actions/booking";
 import { StarsBackgroundDemo } from "@/components/demo-components-backgrounds-stars";
-import { GrayTitle, SectionLabel, SectionLable } from "@/components/reusable";
+import { GrayTitle, SectionLabel } from "@/components/reusable";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ const InterviewerProfilePage = async ({ params }) => {
   const { id } = await params;
 
   const dbUser = await getCurrentUser();
+  if (!dbUser) notFound();
 
   const interviewer = await getInterviewerProfile(id);
   if (!interviewer) notFound();
@@ -59,12 +60,12 @@ const InterviewerProfilePage = async ({ params }) => {
               )}
 
               <div className="flex items-center gap-2 flex-wrap mt-1">
-                {interviewer.yearsExp && (
+                {interviewer.yearExp && (
                   <Badge
                     variant="outline"
                     className="border-white/10 text-stone-400 text-xs px-3 py-1"
                   >
-                    {interviewer.yearsExp}+ yrs experience
+                    {interviewer.yearExp}+ yrs experience
                   </Badge>
                 )}
                 <Badge variant="gold">
@@ -90,7 +91,7 @@ const InterviewerProfilePage = async ({ params }) => {
         <div className="lg:col-span-3 flex flex-col gap-6 order-2 lg:-order-1">
           {interviewer.bio && (
             <div className="bg-[#0f0f11] border border-white/10 rounded-2xl p-8 flex flex-col gap-5">
-              <SectionLable>About</SectionLable>
+              <SectionLabel>About</SectionLabel>
               <p className="text-base text-stone-300 font-light leading-relaxed">
                 {interviewer.bio}
               </p>
@@ -100,7 +101,7 @@ const InterviewerProfilePage = async ({ params }) => {
           {interviewer.categories?.length > 0 && (
             <div className="bg-[#0f0f11] border border-white/10 rounded-2xl p-8 flex flex-col gap-5">
               <div>
-                <SectionLable>Specialties</SectionLable>
+                <SectionLabel>Specialties</SectionLabel>
                 <p className="text-sm text-stone-500 font-light mt-1">
                   Interview categories this expert covers.
                 </p>
@@ -121,7 +122,7 @@ const InterviewerProfilePage = async ({ params }) => {
 
           <div className="bg-[#0f0f11] border border-white/10 rounded-2xl p-8 flex flex-col gap-6">
             <div>
-              <SectionLable>What to expect</SectionLable>
+              <SectionLabel>What to expect</SectionLabel>
               <p className="text-sm text-stone-500 font-light mt-1">
                 Every session on Prept includes the following.
               </p>
