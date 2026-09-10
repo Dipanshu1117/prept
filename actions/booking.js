@@ -49,6 +49,13 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
   const user = await currentUser();
   if (!user) throw new Error("Unauthorized");
 
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+  if (!interviewerId || Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()))
+    throw new Error("Invalid interview slot");
+  if (start >= end || start <= new Date())
+    throw new Error("Please choose a future interview slot");
+
   // ── Arcjet rate limit ──────────────────────────────────────────────────────
   const req = await request();
   const rateLimitError = await checkRateLimit(bookingLimiter, req, user.id);
@@ -74,8 +81,8 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
     where: {
       interviewerId,
       status: "SCHEDULED",
-      startTime: { lt: new Date(endTime) },
-      endTime: { gt: new Date(startTime) },
+      startTime: { lt: end },
+      endTime: { gt: start },
     },
   });
 
@@ -140,8 +147,8 @@ export const bookSlot = async ({ interviewerId, startTime, endTime }) => {
         data: {
           intervieweeId: dbUser.id,
           interviewerId,
-          startTime: new Date(startTime),
-          endTime: new Date(endTime),
+          startTime: start,
+          endTime: end,
           status: "SCHEDULED",
           creditsCharged: credits,
           streamCallId,

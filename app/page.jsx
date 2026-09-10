@@ -4,7 +4,7 @@ import {
   GoldTitle,
   GrayTitle,
   SectionHeading,
-  SectionLable,
+  SectionLabel,
 } from "@/components/reusable";
 import { StarsBackgroundDemo } from "@/components/demo-components-backgrounds-stars";
 import Link from "next/link";
@@ -103,7 +103,7 @@ export default function Home() {
       {/* feature section  and Card section  */}
       <section className="relative z-10 py-28 max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <SectionLable>Feature </SectionLable>
+          <SectionLabel>Feature </SectionLabel>
           <SectionHeading
             gray="Everything you need,"
             gold="nothing you don't"
@@ -208,7 +208,7 @@ export default function Home() {
       {/* Roles Section  */}
       <section className="relative z-10 pb-28 max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <SectionLable> who it&apos;s for</SectionLable>
+          <SectionLabel> who it&apos;s for</SectionLabel>
           <SectionHeading
             gray="Built for both sides"
             gold="of the table"
@@ -247,7 +247,7 @@ export default function Home() {
       {/* Price section  */}
       <section className="relative z-10 pb-28 max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <SectionLable>Pricing</SectionLable>
+          <SectionLabel>Pricing</SectionLabel>
           <SectionHeading
             gray="Simple, transparent"
             gold="credit-based plans"
